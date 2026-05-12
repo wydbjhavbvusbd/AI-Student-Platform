@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Student Social Platform</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            margin:0;
+            display:flex;
+            flex-direction:column;
+            height:100vh;
+        }
+
+        #messages{
+            flex:1;
+            overflow-y:auto;
+            padding:20px;
+            background:#f2f2f2;
+        }
+
+        .controls{
+            padding:15px;
+            background:white;
+            border-top:1px solid #ccc;
+        }
+
+        input{
+            padding:10px;
+            width:30%;
+            margin:5px;
+        }
+
+        button{
+            padding:10px 20px;
+            cursor:pointer;
+        }
+
+        .msg{
+            background:white;
+            margin-bottom:10px;
+            padding:10px;
+            border-radius:8px;
+        }
+
+        img{
+            max-width:200px;
+            margin-top:10px;
+            border-radius:8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="messages"></div>
+
+<div class="controls">
+
+    <input id="username" placeholder="Your Name">
+
+    <input id="message" placeholder="Type message">
+
+    <input id="image" placeholder="Image URL">
+
+    <button onclick="sendMessage()">Send</button>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+
+const socket = io();
+
+const messages = document.getElementById('messages');
+
+function sendMessage(){
+
+    const username =
+        document.getElementById('username').value || 'Anonymous';
+
+    const message =
+        document.getElementById('message').value;
+
+    const image =
+        document.getElementById('image').value;
+
+    if(message || image){
+
+        socket.emit('chat message',{
+            user: username,
+            msg: message,
+            img: image
+        });
+
+        document.getElementById('message').value='';
+        document.getElementById('image').value='';
+    }
+}
+
+socket.on('chat message',(data)=>{
+
+    const div = document.createElement('div');
+
+    div.classList.add('msg');
+
+    div.innerHTML =
+        `<strong>${data.user}:</strong> ${data.msg}`;
+
+    if(data.img){
+
+        div.innerHTML +=
+            `<br><img src="${data.img}">`;
+    }
+
+    messages.appendChild(div);
+
+    messages.scrollTop =
+        messages.scrollHeight;
+});
+
+</script>
+
+</body>
+</html>
