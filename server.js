@@ -57,14 +57,17 @@ io.on('connection', (socket) => {
 
     console.log('A user connected:', socket.id);
 
-    socket.on('chat message', (data) => {
+socket.on('chat message', async (data) => {
 
-        const newMessage = new Message(data);
+    // Save message to MongoDB
+    const newMessage = new Message(data);
 
-        await newMessage.save();
+    await newMessage.save();
 
-        io.emit('chat message', data);
+    // Send message to everyone
+    io.emit('chat message', data);
 
+});
 
     });
 
@@ -73,7 +76,7 @@ io.on('connection', (socket) => {
         console.log('User disconnected');
 
     });
-});
+
 
 const storage = multer.diskStorage({
 
