@@ -5,6 +5,10 @@ const connectDB = require('./public/config/db');
 const Message = require('./model/Message');
 const authRoutes = require('./model/routes/auth');
 const multer = require('multer');
+const userroutes = require('./model/routes/user');
+const {OpenAI}=require('openai');
+
+require('dentv').config();
 
 const app = express();
 const server = http.createServer(app);
@@ -116,7 +120,4 @@ server.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 
 
-});
-
-
-  
+});  
