@@ -1,7 +1,7 @@
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
-const connectDB = require('./config/db');
+const connectDB = require('./public/config/db');
 const Message = require('./models/Message');
 const authRoutes = require('./routes/auth');
 const multer = require('multer');
@@ -108,21 +108,6 @@ io.emit('online users', onlineUsers.length);
 const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
-
-const mongoose = require('mongoose');
-
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log('MongoDB Connected');
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
-};
-
-module.exports = connectDB;
-
 
 const PORT = 5000;
 
