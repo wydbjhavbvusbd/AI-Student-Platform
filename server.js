@@ -1,14 +1,17 @@
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
+
 const connectDB = require('./public/config/db');
 const Message = require('./model/Message');
+const userroutes = require('./model/User');
+
 const authRoutes = require('./model/routes/auth');
+
 const multer = require('multer');
-const userroutes = require('../models/user');
 const {OpenAI}=require('openai');
 
-require('dentv').config();
+require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
