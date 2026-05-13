@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const connectDB = require('./public/config/db');
-const Message = require('./models/Message');
+const Message = require('./model/Message');
 const authRoutes = require('./routes/auth');
 const multer = require('multer');
 
