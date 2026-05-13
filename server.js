@@ -4,7 +4,7 @@ const { Server } = require('socket.io');
 
 const connectDB = require('./public/config/db');
 const Message = require('./model/Message');
-const user = require('./models/User');
+const User = require('./model/User');
 
 const authRoutes = require('./model/routes/auth');
 
