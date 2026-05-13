@@ -3,7 +3,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const connectDB = require('./public/config/db');
 const Message = require('./model/Message');
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./model/routes/auth');
 const multer = require('multer');
 
 const app = express();
