@@ -5,7 +5,7 @@ const connectDB = require('./public/config/db');
 const Message = require('./model/Message');
 const authRoutes = require('./model/routes/auth');
 const multer = require('multer');
-const userroutes = require('./model/user');
+const userroutes = require('../model/user');
 const {OpenAI}=require('openai');
 
 require('dentv').config();
